@@ -4,6 +4,7 @@
   "description": "Time lapse software for the photo booth.",
   "main": "main.js",
   "scripts": {
+    "start": "electron main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ChronoAnomaly/time-lapse/issues"
   },
-  "homepage": "https://github.com/ChronoAnomaly/time-lapse#readme"
+  "homepage": "https://github.com/ChronoAnomaly/time-lapse#readme",
+  "dependencies": {
+    "electron": "^1.6.8"
+  }
 }
