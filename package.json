@@ -1,0 +1,19 @@
+{
+  "name": "time-lapse",
+  "version": "1.0.0",
+  "description": "Time lapse software for the photo booth.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ChronoAnomaly/time-lapse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChronoAnomaly/time-lapse/issues"
+  },
+  "homepage": "https://github.com/ChronoAnomaly/time-lapse#readme"
+}
