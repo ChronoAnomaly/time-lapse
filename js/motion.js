@@ -1,8 +1,19 @@
+fs = require('fs');
+sys = require('sys');
+var photo = 0;
+var fullscreenButton = document.querySelector('.fullscreen-btn');
+fullscreenButton.addEventListener('click', function(evt) {
+  var focusWin = BrowserWindow.getFocusedWindow();
+  var isFull = focusWin.isFullScreen();
+
+  BrowserWindow.getFocusedWindow().setFullScreen(!isFull);
+});
+
 var constraints = {
   audio: false,
   video: {
-    width: 1920,
-    height: 1080
+    width: 1280,
+    height: 720
   }
 };
 navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
@@ -16,13 +27,26 @@ function error(error) {
   console.log(error);
 }
 
+function captureImage() {
+  context.drawImage(video, 0, 0, 640, 480);
+  var sessionID = parseInt(new Date().getTime() / 1000);
+
+  var img = canvas.toDataURL();
+  // strip off the data: url prefix to get just the base64-encoded bytes
+  var data = img.replace(/^data:image\/\w+;base64,/, "");
+  var buf = new Buffer(data, 'base64');
+  fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf);
+  photo++;
+}
+
 var canvas = document.getElementById('motion');
 canvas.width = 640;
 canvas.height = 480;
 var context = canvas.getContext('2d');
-context.globalCompositeOperation = 'difference';
+// context.globalCompositeOperation = 'difference';
 
-setInterval(capture, 100);
+setInterval(captureImage, 1000);
+// setInterval(capture, 100);
 
 function capture() {
   // context.drawImage(video, 640, 480); // testing for viewing current canvas

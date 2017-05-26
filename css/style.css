@@ -1,0 +1,15 @@
+.btn{
+    display:inline-block;
+    font-weight:bold;
+    font-size:2em;
+    border:0px;
+    padding:20px 50px 20px 50px;
+}
+.btn.btn-success{
+    background-color:#3F7F21;
+    color:#FFF;
+}
+.btn-fail{
+    background:#7F0C01;
+    color:#FFF;
+}
