@@ -18,7 +18,7 @@
   </figure>
 
   <figure>
-    <video id="time-lapse" autoplay></video>
+    <video id="time-lapse" autoplay loop controls></video>
     <figcaption>Timelapse Video</figcaption>
   </figure>
 
@@ -28,11 +28,14 @@
   </figure>
 
   <div style="margin-top:40px;">
-    <a href="javascript:window.close();" style="font-size:1.1em;" class="btn btn-fail"><i
-                          class="fa fa-sign-out"></i>Exit Photobooth App</a>
+    <a href="javascript:window.close();" style="font-size:1.1em;" class="btn btn-fail">
+      <i class="fa fa-sign-out"></i>Exit Photobooth App</a>
     <br/><br/>
-    <a style="font-size:1.1em;background-color:#0084b4;color:#FFF;" class="fullscreen-btn btn btn-fail"><i
-                          class="fa fa-arrows-alt"></i>&nbsp;Toggle Fulscreen</a>
+    <a style="font-size:1.1em;background-color:#0084b4;color:#FFF;cursor:pointer;" class="fullscreen-btn btn btn-fail">
+      <i class="fa fa-arrows-alt"></i>&nbsp;Toggle Fulscreen</a>
+    <br/><br/>
+    <a style="font-size:1.1em;background-color:#0084b4;color:#FFF;cursor:pointer;" class="timelapse-btn btn btn-fail">
+        <i class="fa fa-arrows-alt"></i>&nbsp;Load Timelapse Video</a>
   </div>
 
   <div id="tester"></div>

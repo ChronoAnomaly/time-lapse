@@ -9,6 +9,22 @@ fullscreenButton.addEventListener('click', function(evt) {
   BrowserWindow.getFocusedWindow().setFullScreen(!isFull);
 });
 
+var loadVideoButton = document.querySelector('.timelapse-btn');
+loadVideoButton.addEventListener('click', function(evt) {
+  var timeVideo = document.getElementById('time-lapse');
+
+  // attempt to clear the previous video
+  timeVideo.pause();
+  timeVideo.setAttribute('src', '');
+  timeVideo.load();
+
+  // re set to the current video
+  timeVideo.pause();
+  timeVideo.setAttribute('src', 'timelapse\\timelapse.mp4');
+  timeVideo.load();
+  timeVideo.play();
+});
+
 var constraints = {
   audio: false,
   video: {
@@ -37,6 +53,10 @@ function captureImage() {
   var buf = new Buffer(data, 'base64');
   fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf);
   photo++;
+
+  if (photo > 5000) {
+    window.close();
+  }
 }
 
 var canvas = document.getElementById('motion');
