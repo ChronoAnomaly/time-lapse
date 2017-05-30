@@ -1,6 +1,8 @@
-fs = require('fs');
-sys = require('sys');
+const fs = require('fs');
+
 var photo = 0;
+var pictureInterval = 1 * 1000;
+
 var fullscreenButton = document.querySelector('.fullscreen-btn');
 fullscreenButton.addEventListener('click', function(evt) {
   var focusWin = BrowserWindow.getFocusedWindow();
@@ -69,7 +71,7 @@ canvas.height = 720;
 var context = canvas.getContext('2d');
 // context.globalCompositeOperation = 'difference';
 
-setInterval(captureImage, 2000);
+setInterval(captureImage, pictureInterval);
 // setInterval(capture, 100);
 
 function capture() {
@@ -100,9 +102,21 @@ console.log(canvas);
 //   // we have motion!
 // }
 
-navigator.mediaDevices.enumerateDevices().then(function(devices) {
-  devices.forEach(function(device) {
-    console.log(device);
-    $('#tester').append("<p>" + device.kind + ": " + device.label + " id = " + device.deviceId + "</p>");
+function fastAbs(value) {
+  // equivalent to Math.abs();
+  return (value ^ (value >> 31)) - (value >> 31);
+}
+
+//function will check if a directory exists, and create it if it doesn't
+function checkDirectory(directory, callback) {
+  fs.stat(directory, function(err, stats) {
+    //Check if error defined and the error code is "not exists"
+    if (err && err.errno === 34) {
+      //Create the directory, call the callback.
+      fs.mkdir(directory, callback);
+    } else {
+      //just in case there was a different error:
+      callback(err)
+    }
   });
-})
+}
