@@ -3,50 +3,24 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Picture Perfect Time Lapse Photobooth</title>
 
-  <title>Diff Cam Example</title>
-
-  <link rel="stylesheet" href="./css/font-awesome.min.css">
   <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-  <figure>
-    <video id="video" autoplay></video>
-    <figcaption>Live Video</figcaption>
-  </figure>
+  <div id="action-selection">
+    <a id="timelapse-link" href="timelapse.html">
+        <span id="timelapse-button">
+          <img src="images/timelapse300.png">
+        </span>
 
-  <figure>
-    <video id="time-lapse" autoplay loop controls></video>
-    <figcaption>Timelapse Video</figcaption>
-  </figure>
-
-  <figure style="display:none;">
-    <canvas id="motion"></canvas>
-    <figcaption>Motion</figcaption>
-  </figure>
-
-  <div style="margin-top:40px;">
-    <a href="javascript:window.close();" style="font-size:1.1em;" class="btn btn-fail">
-      <i class="fa fa-sign-out"></i>Exit Photobooth App</a>
-    <br/><br/>
-    <a style="font-size:1.1em;background-color:#0084b4;color:#FFF;cursor:pointer;" class="fullscreen-btn btn btn-fail">
-      <i class="fa fa-arrows-alt"></i>&nbsp;Toggle Fulscreen</a>
-    <br/><br/>
-    <a style="font-size:1.1em;background-color:#0084b4;color:#FFF;cursor:pointer;" class="timelapse-btn btn btn-fail">
-        <i class="fa fa-arrows-alt"></i>&nbsp;Load Timelapse Video</a>
+        <h1>Take Time Lapse</h1>
+      </a>
   </div>
 
-  <div id="tester"></div>
-
-
-  <script src="./js/adapter-1.0.7.js"></script>
-  <script>
-    window.$ = window.jQuery = require('./js/jquery-3.2.1.min.js');
-  </script>
-  <script src="./js/motion.js"></script>
-
+  <script src="js/VKeyboard.js"></script>
+  <script src="js/AdminLogin.js"></script>
 </body>
 
 </html>

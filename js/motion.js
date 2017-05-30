@@ -44,14 +44,18 @@ function error(error) {
 }
 
 function captureImage() {
-  context.drawImage(video, 0, 0, 640, 480);
+  context.drawImage(video, 0, 0, 1280, 720);
   var sessionID = parseInt(new Date().getTime() / 1000);
 
   var img = canvas.toDataURL();
   // strip off the data: url prefix to get just the base64-encoded bytes
   var data = img.replace(/^data:image\/\w+;base64,/, "");
   var buf = new Buffer(data, 'base64');
-  fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf);
+  fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
+    if (err)
+      console.error(err);
+    console.log('The file has been saved.');
+  });
   photo++;
 
   if (photo > 5000) {
@@ -60,18 +64,18 @@ function captureImage() {
 }
 
 var canvas = document.getElementById('motion');
-canvas.width = 640;
-canvas.height = 480;
+canvas.width = 1280;
+canvas.height = 720;
 var context = canvas.getContext('2d');
 // context.globalCompositeOperation = 'difference';
 
-setInterval(captureImage, 1000);
+setInterval(captureImage, 2000);
 // setInterval(capture, 100);
 
 function capture() {
   // context.drawImage(video, 640, 480); // testing for viewing current canvas
 
-  context.drawImage(video, 0, 0, 640, 480);
+  context.drawImage(video, 0, 0, 1280, 720);
 
   // do other stuff
 
