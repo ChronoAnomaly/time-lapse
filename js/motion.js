@@ -37,8 +37,10 @@ var constraints = {
 navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
 
 function success(stream) {
-  var video = document.getElementById('video');
+ this.video = document.getElementById('live-video');
   video.srcObject = stream;
+  console.dir(video);
+  console.log('oy');
 }
 
 function error(error) {
@@ -53,11 +55,25 @@ function captureImage() {
   // strip off the data: url prefix to get just the base64-encoded bytes
   var data = img.replace(/^data:image\/\w+;base64,/, "");
   var buf = new Buffer(data, 'base64');
-  fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
-    if (err)
-      console.error(err);
-    console.log('The file has been saved.');
+
+  checkDirectory("./timelapse/", function(error) {
+    if (error) {
+      console.log("oh no!!!", error);
+    } else {
+      //Carry on, all good, directory exists / created.
+      fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
+        if (err)
+          console.error(err);
+        console.log('The file has been saved.');
+      });
+    }
   });
+
+  //   fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
+  //   if (err)
+  //     console.error(err);
+  //   console.log('The file has been saved.');
+  // });
   photo++;
 
   if (photo > 5000) {
@@ -111,7 +127,7 @@ function fastAbs(value) {
 function checkDirectory(directory, callback) {
   fs.stat(directory, function(err, stats) {
     //Check if error defined and the error code is "not exists"
-    if (err && err.errno === 34) {
+    if (err && err.code === 'ENOENT') {
       //Create the directory, call the callback.
       fs.mkdir(directory, callback);
     } else {
@@ -119,4 +135,17 @@ function checkDirectory(directory, callback) {
       callback(err)
     }
   });
+}
+
+function difference(target, data1, data2) {
+	// blend mode difference
+	if (data1.length != data2.length) return null;
+	var i = 0;
+	while (i < (data1.length * 0.25)) {
+		target[4*i] = data1[4*i] == 0 ? 0 : fastAbs(data1[4*i] - data2[4*i]);
+		target[4*i+1] = data1[4*i+1] == 0 ? 0 : fastAbs(data1[4*i+1] - data2[4*i+1]);
+		target[4*i+2] = data1[4*i+2] == 0 ? 0 : fastAbs(data1[4*i+2] - data2[4*i+2]);
+		target[4*i+3] = 0xFF;
+		++i;
+	}
 }
