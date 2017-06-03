@@ -1,7 +1,19 @@
 const fs = require('fs');
+const BrowserWindow = require('electron').remote.BrowserWindow;
+var winston = require('winston');
+
+var logger = new(winston.Logger)({
+  transports: [
+    new(winston.transports.Console)({level: 'error'}),
+    new(winston.transports.File)({filename: './somefile.log', level: '5'})
+  ]
+});
+
+logger.transports.console.level = 'debug';
+logger.transports.file.level = 'debug';
 
 var photo = 0;
-var pictureInterval = 1 * 1000;
+var pictureInterval = 2 * 1000;
 
 var fullscreenButton = document.querySelector('.fullscreen-btn');
 fullscreenButton.addEventListener('click', function(evt) {
@@ -37,14 +49,25 @@ var constraints = {
 navigator.mediaDevices.getUserMedia(constraints).then(success).catch(error);
 
 function success(stream) {
- this.video = document.getElementById('live-video');
+  this.video = document.getElementById('live-video');
   video.srcObject = stream;
-  console.dir(video);
-  console.log('oy');
+  logger.log(video);
+  logger.info('oy');
+
+  logger.log('silly', "127.0.0.1 -asd f asdfa sdf there's no place like home");
+  logger.log('debug', "127.0.0.1 -aaaa there's no place like home");
+  logger.log('verbose', "127.0.0.1 - there's no place like home");
+  logger.log('info', "127.0.0.1 - there's no place like home");
+  logger.log('warn', "127.0.0.1 - there's no place like home");
+  logger.log('error', "127.0.0.1 - there's no place like home");
+  logger.info("127.0.0.1 - there's no place like home");
+  logger.warn("127.0.0.1 - there's no place like home");
+  logger.error("127.0.0.1 - there's no place like home");
+
 }
 
 function error(error) {
-  console.log(error);
+  logger.error(error);
 }
 
 function captureImage() {
@@ -58,21 +81,21 @@ function captureImage() {
 
   checkDirectory("./timelapse/", function(error) {
     if (error) {
-      console.log("oh no!!!", error);
+      logger.log("oh no!!!", error);
     } else {
       //Carry on, all good, directory exists / created.
       fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
         if (err)
-          console.error(err);
-        console.log('The file has been saved.');
+          logger.error(err);
+        logger.log('The file has been saved.');
       });
     }
   });
 
   //   fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
   //   if (err)
-  //     console.error(err);
-  //   console.log('The file has been saved.');
+  //     logger.error(err);
+  //   logger.log('The file has been saved.');
   // });
   photo++;
 
@@ -98,7 +121,7 @@ function capture() {
   // do other stuff
 
 }
-console.log(canvas);
+logger.log(canvas);
 
 // var imageData = canvas.getImageData();
 // var imageScore = 0;
@@ -138,14 +161,21 @@ function checkDirectory(directory, callback) {
 }
 
 function difference(target, data1, data2) {
-	// blend mode difference
-	if (data1.length != data2.length) return null;
-	var i = 0;
-	while (i < (data1.length * 0.25)) {
-		target[4*i] = data1[4*i] == 0 ? 0 : fastAbs(data1[4*i] - data2[4*i]);
-		target[4*i+1] = data1[4*i+1] == 0 ? 0 : fastAbs(data1[4*i+1] - data2[4*i+1]);
-		target[4*i+2] = data1[4*i+2] == 0 ? 0 : fastAbs(data1[4*i+2] - data2[4*i+2]);
-		target[4*i+3] = 0xFF;
-		++i;
-	}
+  // blend mode difference
+  if (data1.length != data2.length)
+    return null;
+  var i = 0;
+  while (i < (data1.length * 0.25)) {
+    target[4 * i] = data1[4 * i] == 0
+      ? 0
+      : fastAbs(data1[4 * i] - data2[4 * i]);
+    target[4 * i + 1] = data1[4 * i + 1] == 0
+      ? 0
+      : fastAbs(data1[4 * i + 1] - data2[4 * i + 1]);
+    target[4 * i + 2] = data1[4 * i + 2] == 0
+      ? 0
+      : fastAbs(data1[4 * i + 2] - data2[4 * i + 2]);
+    target[4 * i + 3] = 0xFF;
+    ++i;
+  }
 }
