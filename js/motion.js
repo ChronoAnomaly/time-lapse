@@ -1,19 +1,22 @@
 const fs = require('fs');
 const BrowserWindow = require('electron').remote.BrowserWindow;
-var winston = require('winston');
+var logger = require('winston');
 
-var logger = new(winston.Logger)({
-  transports: [
-    new(winston.transports.Console)({level: 'error'}),
-    new(winston.transports.File)({filename: './somefile.log', level: '5'})
-  ]
-});
+logger.add(logger.transports.File, {filename: './somefile.log'});
+logger.level = 'debug';
 
-logger.transports.console.level = 'debug';
-logger.transports.file.level = 'debug';
+// var logger = new(winston.Logger)({
+//   transports: [
+//     new(winston.transports.Console)({level: 'error'}),
+//     new(winston.transports.File)({filename: './somefile.log', level: '5'})
+//   ]
+// });
+
+// logger.transports.console.level = 'debug';
+// logger.transports.file.level = 'debug';
 
 var photo = 0;
-var pictureInterval = 2 * 1000;
+var pictureInterval = 1 * 1000;
 
 var fullscreenButton = document.querySelector('.fullscreen-btn');
 fullscreenButton.addEventListener('click', function(evt) {
@@ -84,7 +87,7 @@ function captureImage() {
       logger.log("oh no!!!", error);
     } else {
       //Carry on, all good, directory exists / created.
-      fs.writeFile(__dirname + '/timelapse/img_' + photo + '.png', buf, function(err) {
+      fs.writeFile(__dirname + '/timelapse/img_' + sessionID + '.png', buf, function(err) {
         if (err)
           logger.error(err);
         logger.log('The file has been saved.');

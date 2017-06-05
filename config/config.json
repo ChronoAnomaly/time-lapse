@@ -1,0 +1,6 @@
+{
+  "adminPassword": 123,
+  "timelapseImageDirectory": "timelapse",
+  "resolution": "1280x720",
+  "webcamName": "Logitech HD Webcam C270"
+}

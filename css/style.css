@@ -1,15 +1,26 @@
-.btn{
-    display:inline-block;
-    font-weight:bold;
-    font-size:2em;
-    border:0px;
-    padding:20px 50px 20px 50px;
+html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  background: #FEFFDB;
+  background-image: url('../images/stressed_linen.png');
 }
-.btn.btn-success{
-    background-color:#3F7F21;
-    color:#FFF;
+
+.btn {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 2em;
+  border: 0px;
+  padding: 20px 50px 20px 50px;
 }
-.btn-fail{
-    background:#7F0C01;
-    color:#FFF;
+
+.btn.btn-success {
+  background-color: #3F7F21;
+  color: #FFF;
+}
+
+.btn-fail {
+  background: #7F0C01;
+  color: #FFF;
 }

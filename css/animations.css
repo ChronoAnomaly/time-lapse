@@ -1,0 +1,164 @@
+@-webkit-keyframes flash{
+    0%{
+        opacity:0;
+        z-index:11;
+    }
+    50%{
+        opacity:.9;
+        z-index:11;
+    }
+    100%{
+        opacity:0;
+        z-index:-1;
+    }
+}
+@-webkit-keyframes single-tap{
+    0%{
+        opacity:0;
+        -webkit-transform:translateY(50px);
+    }
+    10%{
+        -webkit-transform:translateY(0px);
+    }
+    20%{
+        -webkit-transform:translateY(0px);
+        -webkit-transform:rotateX(25deg);    
+    }
+    30%{
+        -webkit-transform:translateY(0px);
+        -webkit-transform:rotateX(0deg);
+        opacity:1;
+    }
+    80%{
+        -webkit-transform:translateY(0px);
+        opacity:1;
+    }
+    90%{
+        -webkit-transform:translateY(50px);
+        opacity:0;
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:translateY(50px);
+    }
+}
+
+@-webkit-keyframes hop-once{
+    0%{
+        -webkit-transform:scale(1);
+    }
+    50%{
+        -webkit-transform:scale(.95);
+    }
+    100%{
+        -webkit-transform:scale(1);
+    }
+}
+
+@-webkit-keyframes shrink-n-grow{
+    0%{
+        -webkit-transform:scale(1);
+    }
+    50%{
+        -webkit-transform:scale(.85);
+    }
+    100%{
+        -webkit-transform:scale(1);
+    }
+}
+
+@-webkit-keyframes print-strip-1{
+    80%{
+        z-index:2;
+        opacity:1;
+        -webkit-transform: translateY(-85px) rotate(90deg) rotateX(0deg);
+    }
+    81%{
+        z-index:4;
+        opacity:1;
+    }
+    83%{
+        z-index:4;
+        opacity:1;
+        -webkit-transform: translateY(-85px) rotate(90deg) rotateY(90deg);
+    }
+    95%{
+        z-index:4;
+        opacity:1;
+        -webkit-transform: translateY(180px) rotate(90deg) rotateY(360deg);
+    }
+    100%{
+        z-index:4;
+        opacity:0;
+        -webkit-transform: translateY(180px) rotate(90deg) rotateY(360deg);
+    }
+}
+
+@-webkit-keyframes spin{
+    0%{
+        -webkit-transform:rotate(0deg);
+    }
+    100%{
+        -webkit-transform:rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin-ccw{
+    0%{
+        -webkit-transform:rotate(0deg);
+    }
+    100%{
+        -webkit-transform:rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes fade-in{
+    0%{
+        opacity:0;
+    }
+    100%{
+        opacity:1;
+    }
+}
+
+@-webkit-keyframes fade-in-left{
+    0%{
+        opacity:0;
+        -webkit-transform:translateX(-20px);
+    }
+    100%{
+        opacity:1;
+        -webkit-transform:translateX(0px);
+    }
+}
+
+@-webkit-keyframes fade-out{
+    0%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+    }
+}
+
+html,body{
+    -webkit-user-select: none;
+}
+
+.single-tap-animated{
+    -webkit-animation: single-tap 10s infinite ease-in-out;
+}
+
+.flash{
+    -webkit-animation: flash 1s 1;
+}
+.clear{
+    clear:both;
+}
+.spin{
+    -webkit-animation: 1500ms spin linear infinite;
+}
+.fade-out{
+    -webkit-animation:500ms fade-out 1 ease-in;
+    -webkit-animation-fill-mode: forwards;
+}

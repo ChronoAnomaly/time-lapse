@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Loading Settings</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link type="text/css" rel="stylesheet" href="./css/style.css" />
+  <link type="text/css" rel="stylesheet" href="./css/animations.css" />
+  <link type="text/css" rel="stylesheet" href="./css/load-settings.css" />
+
+</head>
+
+<body>
+  <div class="seek-center" style="height:100%;">
+
+    <div class="text-center">
+
+      <div id="loading-block">
+        <div class="gear-box">
+          <img class="gear1" src="images/gear1.svg" />
+          <img class="gear2" src="images/gear2.svg" />
+          <img class="gear3" src="images/gear3.svg" />
+          <img class="gear4" src="images/gear4.svg" />
+        </div>
+
+        <h1 id="progress-message" style="margin:0px;" class="large">Configuring Booth...</h1>
+        <div id="check-list">
+          <span id="load-settings-box"><span>Load Settings...</span></span>
+          <span id="scan-webcams-box"><span>Scan Webcams</span></span>
+          <span id="perform-checks-box"><span>Perform Checks</span></span>
+        </div>
+
+      </div>
+
+      <div id="button-box">
+        <a class="btn btn-fail hidden" href="load_settings.html"><img src="images/error.svg"/><span>Check Errors</span></a>
+        <a class="btn btn-launch" href="index.html"><img src="images/rocket.svg"/><span>Launch Timelapse Booth</span></a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="./js/SettingsLoadingPage.js"></script>
+  <script src="./js/VKeyboard.js"></script>
+  <script type="text/javascript" src="./js/simple_modal.min.js"></script>
+  <script type="text/javascript">
+    page = new SettingsLoadingPage();
+    page.run();
+  </script>
+</body>
+
+</html>
